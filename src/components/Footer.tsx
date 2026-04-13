@@ -12,8 +12,9 @@ export function Footer() {
       }}
     >
       Built with ❤️ ·{" "}
-      <span style={{ color: "#fff", fontWeight: 700 }}>Nephat Muchiri</span> · AI
-      Innovation & Software Engineering · © 2026
+      <span style={{ color: "#fff", fontWeight: 700 }}>Nephat Muchiri</span>
+      <span style={{ color: "#6B7280", fontSize: ".75rem" }}> (Nephat Mutugi)</span>
+      {" "}· AI Innovation & Software Engineering · © 2026
     </footer>
   );
 }
