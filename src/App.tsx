@@ -8,6 +8,7 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { COLORS } from "./data/content";
 import { MobileProvider } from "./context/MobileContext";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Projects />
         <Contact />
         <Footer />
+        <Analytics />
       </div>
     </MobileProvider>
   );
