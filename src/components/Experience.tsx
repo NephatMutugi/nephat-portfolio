@@ -63,9 +63,9 @@ export function Experience() {
                   }}
                 >
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 700, fontSize: mobile ? ".88rem" : ".95rem", color: COLORS.text }}>
+                    <h3 style={{ fontWeight: 700, fontSize: mobile ? ".88rem" : ".95rem", color: COLORS.text }}>
                       {e.role}
-                    </div>
+                    </h3>
                     <div style={{ fontSize: ".8rem", color: COLORS.accent, fontWeight: 600, marginTop: ".2rem" }}>
                       {e.company} · {e.location}
                     </div>

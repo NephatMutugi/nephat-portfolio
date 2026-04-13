@@ -166,7 +166,9 @@ export function Hero() {
             >
               <img
                 src="/avatar.jpg"
-                alt="Nephat Muchiri"
+                alt="Nephat Muchiri – AI Innovation Engineer"
+                width={260}
+                height={300}
                 style={{
                   width: "100%",
                   height: "100%",

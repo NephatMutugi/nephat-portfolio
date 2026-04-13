@@ -49,9 +49,9 @@ export function Skills() {
                 {s.icon}
               </div>
 
-              <div style={{ fontWeight: 700, fontSize: ".95rem", color: COLORS.text, marginBottom: ".75rem" }}>
+              <h3 style={{ fontWeight: 700, fontSize: ".95rem", color: COLORS.text, marginBottom: ".75rem" }}>
                 {s.title}
-              </div>
+              </h3>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: ".4rem" }}>
                 {s.tags.map((t) => (

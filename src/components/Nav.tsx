@@ -33,6 +33,7 @@ export function Nav() {
 
   return (
     <nav
+      aria-label="Main navigation"
       style={{
         position: "fixed",
         top: 0,

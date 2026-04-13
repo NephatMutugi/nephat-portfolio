@@ -72,9 +72,9 @@ export function Projects() {
                 </div>
               </div>
 
-              <div style={{ fontWeight: 700, fontSize: ".95rem", color: COLORS.text, marginBottom: ".35rem" }}>
+              <h3 style={{ fontWeight: 700, fontSize: ".95rem", color: COLORS.text, marginBottom: ".35rem" }}>
                 {p.title}
-              </div>
+              </h3>
               <div style={{ fontSize: ".76rem", color: COLORS.accent, fontWeight: 600, marginBottom: ".65rem" }}>
                 {p.metric}
               </div>
