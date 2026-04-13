@@ -12,7 +12,8 @@ interface FormState {
 
 const EMPTY_FORM: FormState = { name: "", email: "", subject: "", message: "" };
 
-const RECIPIENT = "muchirinephat5@gmail.com";
+// 👉 Replace with your Formspree endpoint: https://formspree.io/f/xxxxxxxx
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoknode";
 
 const inputStyle: React.CSSProperties = {
   background: COLORS.surface,
@@ -36,24 +37,39 @@ const labelStyle: React.CSSProperties = {
 export function Contact() {
   const mobile = useMobile();
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!form.name || !form.email || !form.message) return;
 
-    const subject = encodeURIComponent(
-      form.subject || `Portfolio enquiry from ${form.name}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-    );
-    window.location.href = `mailto:${RECIPIENT}?subject=${subject}&body=${body}`;
+    setStatus("sending");
 
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      setForm(EMPTY_FORM);
-    }, 3000);
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject || `Portfolio enquiry from ${form.name}`,
+          message: form.message,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        setTimeout(() => {
+          setStatus("idle");
+          setForm(EMPTY_FORM);
+        }, 3000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -180,20 +196,28 @@ export function Contact() {
             <button
               onClick={handleSend}
               type="button"
+              disabled={status === "sending" || status === "sent"}
               style={{
-                background: sent ? "#16A34A" : COLORS.accent,
+                background:
+                  status === "sent" ? "#16A34A" :
+                  status === "error" ? "#DC2626" :
+                  COLORS.accent,
                 color: "#fff",
                 border: "none",
                 padding: ".78rem 1.5rem",
                 borderRadius: 9,
                 fontWeight: 700,
                 fontSize: ".95rem",
-                cursor: "pointer",
-                transition: "background .25s",
+                cursor: status === "sending" || status === "sent" ? "not-allowed" : "pointer",
+                opacity: status === "sending" ? 0.75 : 1,
+                transition: "background .25s, opacity .25s",
                 width: "100%",
               }}
             >
-              {sent ? "✅ Message Sent!" : "Send Message →"}
+              {status === "sending" && "Sending…"}
+              {status === "sent"    && "✅ Message Sent!"}
+              {status === "error"   && "❌ Failed — please try again"}
+              {status === "idle"    && "Send Message →"}
             </button>         </div>
         </div>
       </div>
