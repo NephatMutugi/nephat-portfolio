@@ -1,14 +1,30 @@
-
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { COLORS, EXPERIENCE } from "../data/content";
 import { useMobile } from "../context/MobileContext";
-import { Tag, SectionHeader } from "./shared/Tag";
+import { Tag } from "./shared/Tag";
+import { FadeIn } from "./FadeIn";
 
 export function Experience() {
   const mobile = useMobile();
   const [openIndex, setOpenIndex] = useState<number>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const bodyRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [heights, setHeights] = useState<number[]>([]);
 
-  const toggle = (i: number) => setOpenIndex(openIndex === i ? -1 : i);
+  const measureHeights = useCallback(() => {
+    setHeights(bodyRefs.current.map((el) => el?.scrollHeight ?? 0));
+  }, []);
+
+  useEffect(() => {
+    measureHeights();
+    window.addEventListener("resize", measureHeights);
+    return () => window.removeEventListener("resize", measureHeights);
+  }, [measureHeights]);
+
+  const toggle = (i: number) => {
+    setOpenIndex(openIndex === i ? -1 : i);
+    requestAnimationFrame(measureHeights);
+  };
 
   return (
     <section
@@ -19,110 +35,125 @@ export function Experience() {
       }}
     >
       <div style={{ maxWidth: 1100, margin: "auto" }}>
-        <SectionHeader eyebrow="Career Journey" title="Work Experience" />
+        <FadeIn>
+          <SectionHeaderDark eyebrow="Career Journey" title="Work Experience" />
+        </FadeIn>
 
+        <FadeIn delay={100}>
         <div
           style={{
             border: `1px solid ${COLORS.border}`,
-            borderRadius: 10,
+            borderRadius: 12,
             overflow: "hidden",
+            boxShadow: "0 4px 24px rgba(0,0,0,.3)",
           }}
         >
           {EXPERIENCE.map((e, i) => {
             const isOpen = openIndex === i;
+            const isHovered = hoveredIndex === i;
             return (
-              <button
-                key={e.role}
-                onClick={() => toggle(i)}
-                aria-expanded={isOpen}
-                aria-controls={`experience-body-${i}`}
-                id={`experience-header-${i}`}
-                style={{
-                  display: "block",
-                  width: "100%",
-                  textAlign: "left",
-                  background: isOpen ? COLORS.surface : COLORS.bg,
-                  borderLeft: `3px solid ${isOpen ? COLORS.accent : "transparent"}`,
-                  borderRight: "none",
-                  borderTop: "none",
-                  borderBottom:
-                    i < EXPERIENCE.length - 1 ? `1px solid ${COLORS.border}` : "none",
-                  padding: mobile ? "1.25rem" : "1.6rem 1.75rem",
-                  cursor: "pointer",
-                  transition: "all .2s",
-                  fontFamily: "inherit",
-                }}
-              >
-                {/* Header row */}
-                <div
+              <div key={e.company + e.role}>
+                <button
+                  onClick={() => toggle(i)}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  aria-expanded={isOpen}
+                  aria-controls={`experience-body-${i}`}
+                  id={`experience-header-${i}`}
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    gap: ".75rem",
+                    display: "block",
+                    width: "100%",
+                    textAlign: "left",
+                    background: isOpen
+                      ? COLORS.surface
+                      : isHovered
+                        ? "#162033"
+                        : COLORS.bg,
+                    borderLeft: `3px solid ${isOpen ? COLORS.accent : "transparent"}`,
+                    borderRight: "none",
+                    borderTop: "none",
+                    borderBottom:
+                      i < EXPERIENCE.length - 1 ? `1px solid ${COLORS.border}` : "none",
+                    padding: mobile ? "1.25rem" : "1.6rem 1.75rem",
+                    cursor: "pointer",
+                    transition: "background .2s, border-color .2s",
+                    fontFamily: "inherit",
                   }}
                 >
-                  <div style={{ flex: 1 }}>
-                    <h3 style={{ fontWeight: 700, fontSize: mobile ? ".88rem" : ".95rem", color: COLORS.text }}>
-                      {e.role}
-                    </h3>
-                    <div style={{ fontSize: ".8rem", color: COLORS.accent, fontWeight: 600, marginTop: ".2rem" }}>
-                      {e.company} · {e.location}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      gap: ".75rem",
+                    }}
+                  >
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontWeight: 700, fontSize: mobile ? ".88rem" : ".95rem", color: COLORS.text }}>
+                        {e.role}
+                      </h3>
+                      <div style={{ fontSize: ".8rem", color: COLORS.accent, fontWeight: 600, marginTop: ".2rem" }}>
+                        {e.company} · {e.location}
+                      </div>
+                      {e.award && (
+                        <div
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: ".3rem",
+                            background: "rgba(251,191,36,.12)",
+                            border: "1px solid rgba(251,191,36,.3)",
+                            color: "#FBBF24",
+                            borderRadius: 99,
+                            fontSize: ".68rem",
+                            fontWeight: 700,
+                            padding: ".15rem .65rem",
+                            marginTop: ".4rem",
+                          }}
+                        >
+                          {e.award}
+                        </div>
+                      )}
                     </div>
-                    {e.award && (
-                      <div
+
+                    <div style={{ display: "flex", alignItems: "center", gap: ".5rem", flexShrink: 0 }}>
+                      {!mobile && (
+                        <span style={{ fontSize: ".76rem", color: COLORS.muted }}>{e.period}</span>
+                      )}
+                      <span
                         style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: ".3rem",
-                          background: "#FFF7ED",
-                          border: "1px solid #FED7AA",
-                          color: "#C2410C",
-                          borderRadius: 99,
-                          fontSize: ".68rem",
-                          fontWeight: 700,
-                          padding: ".15rem .65rem",
-                          marginTop: ".4rem",
+                          color: COLORS.muted,
+                          display: "inline-block",
+                          transition: "transform .25s",
+                          transform: isOpen ? "rotate(180deg)" : "none",
+                          fontSize: ".85rem",
                         }}
                       >
-                        {e.award}
-                      </div>
-                    )}
+                        ▾
+                      </span>
+                    </div>
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: ".5rem", flexShrink: 0 }}>
-                    {!mobile && (
-                      <span style={{ fontSize: ".76rem", color: COLORS.muted }}>{e.period}</span>
-                    )}
-                    <span
-                      style={{
-                        color: COLORS.muted,
-                        display: "inline-block",
-                        transition: "transform .2s",
-                        transform: isOpen ? "rotate(180deg)" : "none",
-                        fontSize: ".85rem",
-                      }}
-                    >
-                      ▾
-                    </span>
-                  </div>
-                </div>
+                  {mobile && (
+                    <div style={{ fontSize: ".72rem", color: COLORS.muted, marginTop: ".3rem" }}>
+                      {e.period}
+                    </div>
+                  )}
+                </button>
 
-                {/* Period on mobile */}
-                {mobile && (
-                  <div style={{ fontSize: ".72rem", color: COLORS.muted, marginTop: ".3rem" }}>
-                    {e.period}
-                  </div>
-                )}
-
-                {/* Expanded body */}
-                {isOpen && (
-                  <div
-                    id={`experience-body-${i}`}
-                    role="region"
-                    aria-labelledby={`experience-header-${i}`}
-                    style={{ marginTop: "1rem" }}
-                  >
+                <div
+                  ref={(el) => { bodyRefs.current[i] = el; }}
+                  id={`experience-body-${i}`}
+                  role="region"
+                  aria-labelledby={`experience-header-${i}`}
+                  style={{
+                    maxHeight: isOpen ? (heights[i] || 800) : 0,
+                    overflow: "hidden",
+                    transition: "max-height .4s cubic-bezier(.4,0,.2,1)",
+                    background: COLORS.surface,
+                  }}
+                >
+                  <div style={{ padding: mobile ? "0 1.25rem 1.25rem" : "0 1.75rem 1.6rem" }}>
                     <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: ".45rem" }}>
                       {e.bullets.map((b) => (
                         <li
@@ -145,7 +176,7 @@ export function Experience() {
                             }}
                           >
                             ▸
-                        </span>
+                          </span>
                           {b}
                         </li>
                       ))}
@@ -156,12 +187,35 @@ export function Experience() {
                       ))}
                     </div>
                   </div>
-                )}
-              </button>
+                </div>
+              </div>
             );
           })}
         </div>
+        </FadeIn>
       </div>
     </section>
+  );
+}
+
+function SectionHeaderDark({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div style={{ marginBottom: "2.5rem" }}>
+      <div
+        style={{
+          fontSize: ".72rem",
+          fontWeight: 700,
+          letterSpacing: ".12em",
+          textTransform: "uppercase",
+          color: COLORS.accent,
+          marginBottom: ".5rem",
+        }}
+      >
+        {eyebrow}
+      </div>
+      <h2 style={{ fontSize: "1.85rem", fontWeight: 800, color: COLORS.text }}>
+        {title}
+      </h2>
+    </div>
   );
 }

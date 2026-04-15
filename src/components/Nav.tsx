@@ -21,8 +21,6 @@ export function Nav() {
         });
       },
       {
-        // top offset clears the fixed nav; bottom -50% means a section
-        // becomes active once it fills the upper half of the viewport
         rootMargin: "-80px 0px -50% 0px",
         threshold: 0,
       }
@@ -38,8 +36,8 @@ export function Nav() {
         position: "fixed",
         top: 0,
         width: "100%",
-        background: "rgba(255,255,255,0.93)",
-        backdropFilter: "blur(14px)",
+        background: "rgba(15,23,42,0.85)",
+        backdropFilter: "blur(16px)",
         borderBottom: `1px solid ${COLORS.border}`,
         zIndex: 200,
       }}
@@ -79,7 +77,6 @@ export function Nav() {
 
             {menuOpen && (
               <>
-                {/* Transparent overlay to close menu on outside click */}
                 <div
                   onClick={() => setMenuOpen(false)}
                   style={{
@@ -94,13 +91,13 @@ export function Nav() {
                     top: "100%",
                     left: 0,
                     right: 0,
-                    background: "#fff",
+                    background: COLORS.surface,
                     borderBottom: `1px solid ${COLORS.border}`,
                     display: "flex",
                     flexDirection: "column",
                     padding: ".75rem 1.25rem",
                     gap: ".25rem",
-                    boxShadow: "0 8px 24px rgba(0,0,0,.08)",
+                    boxShadow: "0 8px 24px rgba(0,0,0,.3)",
                   }}
                 >
                   {NAV_LINKS.map((l) => (
@@ -125,7 +122,7 @@ export function Nav() {
                     onClick={() => setMenuOpen(false)}
                     style={{
                       background: COLORS.accent,
-                      color: "#fff",
+                      color: "#0F172A",
                       padding: ".6rem 1rem",
                       borderRadius: 8,
                       fontWeight: 700,
@@ -135,7 +132,7 @@ export function Nav() {
                       textAlign: "center",
                     }}
                   >
-                    Hire Me
+                    Contact
                   </a>
                 </div>
               </>
@@ -174,7 +171,7 @@ export function Nav() {
               href="#contact"
               style={{
                 background: COLORS.accent,
-                color: "#fff",
+                color: "#0F172A",
                 padding: ".45rem 1.15rem",
                 borderRadius: 8,
                 fontWeight: 700,
@@ -182,7 +179,7 @@ export function Nav() {
                 textDecoration: "none",
               }}
             >
-              Hire Me
+              Contact
             </a>
           </>
         )}

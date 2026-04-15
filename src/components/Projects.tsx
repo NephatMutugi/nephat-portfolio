@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import { COLORS, PROJECTS } from "../data/content";
 import { useMobile } from "../context/MobileContext";
 import { Tag, SectionHeader } from "./shared/Tag";
+import { FadeIn } from "./FadeIn";
 
 export function Projects() {
   const mobile = useMobile();
@@ -17,7 +17,9 @@ export function Projects() {
       }}
     >
       <div style={{ maxWidth: 1100, margin: "auto" }}>
-        <SectionHeader eyebrow="Featured Work" title="Projects" />
+        <FadeIn>
+          <SectionHeader eyebrow="Featured Work" title="Projects" />
+        </FadeIn>
 
         <div
           style={{
@@ -27,23 +29,24 @@ export function Projects() {
           }}
         >
           {PROJECTS.map((p, i) => (
+            <FadeIn key={p.title} delay={i * 80}>
             <div
-              key={p.title}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
               style={{
                 background: COLORS.bg,
-                border: `1px solid ${hovered === i ? COLORS.accent : COLORS.border}`,
+                border: `1px solid ${hovered === i ? `${COLORS.accent}66` : COLORS.border}`,
                 borderRadius: 12,
                 padding: "1.5rem",
                 display: "flex",
                 flexDirection: "column",
                 transition: "all .22s",
                 transform: hovered === i ? "translateY(-4px)" : "none",
-                boxShadow: hovered === i ? "0 12px 40px rgba(37,99,235,.1)" : "none",
+                boxShadow: hovered === i
+                  ? "0 12px 40px rgba(96,165,250,.15)"
+                  : "0 1px 3px rgba(0,0,0,.1)",
               }}
             >
-              {/* Top row */}
               <div
                 style={{
                   display: "flex",
@@ -78,7 +81,7 @@ export function Projects() {
               <div style={{ fontSize: ".76rem", color: COLORS.accent, fontWeight: 600, marginBottom: ".65rem" }}>
                 {p.metric}
               </div>
-              <p style={{ fontSize: ".83rem", color: COLORS.muted, flex: 1, marginBottom: "1rem", lineHeight: 1.6 }}>
+              <p style={{ fontSize: ".88rem", color: COLORS.muted, flex: 1, marginBottom: "1rem", lineHeight: 1.65 }}>
                 {p.desc}
               </p>
 
@@ -88,6 +91,7 @@ export function Projects() {
                 ))}
               </div>
             </div>
+            </FadeIn>
           ))}
         </div>
       </div>

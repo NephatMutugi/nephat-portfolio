@@ -2,6 +2,7 @@ import { useState } from "react";
 import { COLORS, CONTACT_LINKS } from "../data/content";
 import { useMobile } from "../context/MobileContext";
 import { SectionHeader } from "./shared/Tag";
+import { FadeIn } from "./FadeIn";
 
 interface FormState {
   name: string;
@@ -12,7 +13,6 @@ interface FormState {
 
 const EMPTY_FORM: FormState = { name: "", email: "", subject: "", message: "" };
 
-// 👉 Replace with your Formspree endpoint: https://formspree.io/f/xxxxxxxx
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoknode";
 
 const inputStyle: React.CSSProperties = {
@@ -24,6 +24,7 @@ const inputStyle: React.CSSProperties = {
   color: COLORS.text,
   width: "100%",
   fontFamily: "inherit",
+  transition: "border-color .2s, box-shadow .2s",
 };
 
 const labelStyle: React.CSSProperties = {
@@ -81,7 +82,9 @@ export function Contact() {
       }}
     >
       <div style={{ maxWidth: 1100, margin: "auto" }}>
-        <SectionHeader eyebrow="Let's Connect" title="Get In Touch" />
+        <FadeIn>
+          <SectionHeader eyebrow="Let's Connect" title="Get In Touch" />
+        </FadeIn>
 
         <div
           style={{
@@ -91,7 +94,7 @@ export function Contact() {
             alignItems: "start",
           }}
         >
-          {/* Contact info */}
+          <FadeIn delay={100}>
           <div>
             <h3 style={{ fontWeight: 700, fontSize: "1.05rem", color: COLORS.text, marginBottom: ".65rem" }}>
               Contact Details
@@ -131,7 +134,10 @@ export function Contact() {
                         color: COLORS.text,
                         textDecoration: "none",
                         wordBreak: "break-all",
+                        transition: "color .2s",
                       }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.accent)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.text)}
                     >
                       {cc.label}
                     </a>
@@ -142,83 +148,100 @@ export function Contact() {
               ))}
             </div>
           </div>
+          </FadeIn>
 
-          {/* Form */}
-          <div style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
-                gap: ".85rem",
-              }}
-            >
+          <FadeIn delay={200}>
+          <div
+            style={{
+              background: COLORS.surface,
+              border: `1px solid ${COLORS.border}`,
+              borderRadius: 14,
+              padding: mobile ? "1.25rem" : "1.75rem",
+              boxShadow: "0 4px 24px rgba(0,0,0,.2)",
+            }}
+          >
+            <h3 style={{ fontWeight: 700, fontSize: "1.05rem", color: COLORS.text, marginBottom: "1.25rem" }}>
+              Send a Message
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: ".85rem" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
+                  gap: ".85rem",
+                }}
+              >
+                <div>
+                  <label style={labelStyle}>Full Name</label>
+                  <input
+                    style={inputStyle}
+                    placeholder="Jane Smith"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>Email Address</label>
+                  <input
+                    style={inputStyle}
+                    type="email"
+                    placeholder="jane@company.com"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
+                </div>
+              </div>
+
               <div>
-                <label style={labelStyle}>Full Name</label>
+                <label style={labelStyle}>Subject</label>
                 <input
                   style={inputStyle}
-                  placeholder="Jane Smith"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Project inquiry / Job opportunity"
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
                 />
               </div>
+
               <div>
-                <label style={labelStyle}>Email Address</label>
-                <input
-                  style={inputStyle}
-                  type="email"
-                  placeholder="jane@company.com"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                <label style={labelStyle}>Message</label>
+                <textarea
+                  style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
+                  placeholder="Tell me about your project or opportunity..."
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
                 />
               </div>
-            </div>
 
-            <div>
-              <label style={labelStyle}>Subject</label>
-              <input
-                style={inputStyle}
-                placeholder="Project inquiry / Job opportunity"
-                value={form.subject}
-                onChange={(e) => setForm({ ...form, subject: e.target.value })}
-              />
+              <button
+                onClick={handleSend}
+                type="button"
+                disabled={status === "sending" || status === "sent"}
+                className="btn-hover"
+                style={{
+                  background:
+                    status === "sent" ? "#4ADE80" :
+                    status === "error" ? "#F87171" :
+                    COLORS.accent,
+                  color: "#0F172A",
+                  border: "none",
+                  padding: ".78rem 1.5rem",
+                  borderRadius: 9,
+                  fontWeight: 700,
+                  fontSize: ".95rem",
+                  cursor: status === "sending" || status === "sent" ? "not-allowed" : "pointer",
+                  opacity: status === "sending" ? 0.75 : 1,
+                  transition: "background .25s, opacity .25s",
+                  width: "100%",
+                }}
+              >
+                {status === "sending" && "Sending…"}
+                {status === "sent"    && "✅ Message Sent!"}
+                {status === "error"   && "❌ Failed — please try again"}
+                {status === "idle"    && "Send Message →"}
+              </button>
             </div>
-
-            <div>
-              <label style={labelStyle}>Message</label>
-              <textarea
-                style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
-                placeholder="Tell me about your project or opportunity..."
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-              />
-            </div>
-
-            <button
-              onClick={handleSend}
-              type="button"
-              disabled={status === "sending" || status === "sent"}
-              style={{
-                background:
-                  status === "sent" ? "#16A34A" :
-                  status === "error" ? "#DC2626" :
-                  COLORS.accent,
-                color: "#fff",
-                border: "none",
-                padding: ".78rem 1.5rem",
-                borderRadius: 9,
-                fontWeight: 700,
-                fontSize: ".95rem",
-                cursor: status === "sending" || status === "sent" ? "not-allowed" : "pointer",
-                opacity: status === "sending" ? 0.75 : 1,
-                transition: "background .25s, opacity .25s",
-                width: "100%",
-              }}
-            >
-              {status === "sending" && "Sending…"}
-              {status === "sent"    && "✅ Message Sent!"}
-              {status === "error"   && "❌ Failed — please try again"}
-              {status === "idle"    && "Send Message →"}
-            </button>         </div>
+          </div>
+          </FadeIn>
         </div>
       </div>
     </section>

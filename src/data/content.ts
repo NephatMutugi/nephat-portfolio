@@ -1,24 +1,24 @@
 import type { Stat, Skill, ExperienceItem, Project, ContactLink, TagStyle } from "../types";
 
 export const COLORS = {
-  bg: "#FFFFFF",
-  surface: "#F9FAFB",
-  surface2: "#F3F4F6",
-  border: "#E5E7EB",
-  text: "#111827",
-  muted: "#6B7280",
-  accent: "#2563EB",
-  accent2: "#7C3AED",
-  green: "#16A34A",
-  greenBg: "#F0FDF4",
-  greenBorder: "#BBF7D0",
+  bg: "#0F172A",
+  surface: "#1E293B",
+  surface2: "#334155",
+  border: "#334155",
+  text: "#F1F5F9",
+  muted: "#94A3B8",
+  accent: "#60A5FA",
+  accent2: "#A78BFA",
+  green: "#4ADE80",
+  greenBg: "rgba(74,222,128,.1)",
+  greenBorder: "rgba(74,222,128,.25)",
 };
 
 export const STATS: Stat[] = [
   { num: "7+", label: "Years Experience" },
-  { num: "2M+", label: "Users Served" },
+  { num: "5M+", label: "Users Served" },
   { num: "5+", label: "Countries" },
-  { num: "$1B+", label: "Transactions Enabled" },
+  { num: "$5B+", label: "Transactions Enabled" },
 ];
 
 export const SKILLS: Skill[] = [
@@ -32,11 +32,19 @@ export const SKILLS: Skill[] = [
   },
   {
     icon: "⚙️",
-    title: "Languages & Backend",
+    title: "Languages & Frameworks",
     color: "#2563EB",
     bg: "#EFF6FF",
     border: "#BFDBFE",
     tags: ["Python", "FastAPI", "Java", "Go", "Kotlin", "TypeScript", "Spring Boot", "NumPy", "pandas", "Microservices", "Apache Camel"],
+  },
+  {
+    icon: "🎨",
+    title: "Frontend & UI",
+    color: "#0891B2",
+    bg: "#ECFEFF",
+    border: "#A5F3FC",
+    tags: ["React", "Angular", "TypeScript", "HTML/CSS", "Responsive Design"],
   },
   {
     icon: "☁️",
@@ -56,31 +64,37 @@ export const SKILLS: Skill[] = [
   },
   {
     icon: "🗄️",
-    title: "Databases",
+    title: "Data & Observability",
     color: "#B45309",
     bg: "#FFFBEB",
     border: "#FDE68A",
-    tags: ["PostgreSQL", "DynamoDB", "Redis", "Oracle", "MySQL", "MongoDB"],
-  },
-  {
-    icon: "📊",
-    title: "Observability",
-    color: "#0E7490",
-    bg: "#ECFEFF",
-    border: "#A5F3FC",
-    tags: ["Grafana", "Prometheus", "ELK Stack"],
+    tags: ["PostgreSQL", "DynamoDB", "Redis", "Oracle", "MySQL", "MongoDB", "Grafana", "Prometheus", "ELK Stack"],
   },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    role: "AI Innovations Specialist – Software Engineering",
-    company: "Crossover / IgniteTech (Khoros)",
+    role: "AI Innovation Specialist",
+    company: "IgniteTech",
     location: "Remote",
-    period: "2024 – Present",
+    period: "Apr 2026 – Present",
     award: null,
     bullets: [
-      "Engineering Python/FastAPI backend services for IRIS AI — Khoros's AI-native omnichannel social media management platform serving enterprise brands",
+      "Architecting and deploying AI-driven systems that cut development timelines, reduce errors, and deliver solutions with scalability across IgniteTech's product portfolio",
+      "Fine-tuning LLMs to build new AI-powered products and modules integrated into existing solutions or forming the foundation of new offerings",
+      "Building full-stack features with React frontends and Python/Node.js backends, automating internal workflows using advanced AI techniques",
+      "Leveraging multiple LLMs (GPT, Claude, Mistral) and GenAI code assistants to accelerate full-stack development and continuous delivery",
+    ],
+    tags: ["Python", "TypeScript", "React", "Node.js", "LLM", "AI Agents", "FastAPI"],
+  },
+  {
+    role: "AI-First Java Developer",
+    company: "Skyvera",
+    location: "Remote",
+    period: "2024 – Mar 2026",
+    award: null,
+    bullets: [
+      "Engineering full-stack services for an AI-native omnichannel social media management platform serving enterprise brands",
       "Building real-time Kafka streaming pipelines to ingest and process billions of social signals across 187 languages for sentiment analysis and intelligent routing",
       "Designing DynamoDB data models and Redis caching layers powering high-throughput social engagement and brand care workflows",
       "Integrating LLMs for AI-driven sentiment analysis, response generation, content scheduling, and automated interaction triage across channels including Instagram, LinkedIn, TikTok, YouTube, and Facebook",
@@ -95,7 +109,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "2023 – 2025",
     award: null,
     bullets: [
-      "Built backend for DigiFarm — serving 2M+ farmers across 700+ cooperatives",
+      "Built the platform for DigiFarm — serving 2M+ farmers across 700+ cooperatives",
       "Designed credit scoring models from produce delivery & transaction history",
       "Enabled KES 1B+ in agricultural loans via Access Bank infrastructure",
       "Developed integrations connecting farmer data, payments & financial partners",
@@ -106,7 +120,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Lead Integrations Engineer",
     company: "NBC Tanzania",
     location: "Remote",
-    period: "Apr – Oct 2023",
+    period: "Apr – Dec 2023",
     award: null,
     bullets: [
       "Exposed Oracle Flexcube core banking as REST APIs via WSO2 API Manager",
@@ -120,14 +134,27 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Application Developer",
     company: "KCB Group",
     location: "Nairobi",
-    period: "2022 – 2023",
+    period: "Sep 2021 – 2023",
     award: "🏆 Unsung Hero Award",
     bullets: [
       "Maintained uninterrupted services for 1M+ customers during KCB–BPR merger",
-      "Built cross-institutional APIs integrating banking systems across two countries",
+      "Built Angular-based internal dashboards and cross-institutional APIs integrating banking systems across two countries",
       "Implemented API management infrastructure using WSO2 API Manager",
     ],
-    tags: ["Java", "Go", "WSO2", "Azure", "ActiveMQ"],
+    tags: ["Java", "Angular", "Go", "WSO2", "Azure", "ActiveMQ"],
+  },
+  {
+    role: "Software Development Intern",
+    company: "Microsoft Africa Development Center",
+    location: "Nairobi",
+    period: "Apr 2021 – Aug 2021",
+    award: null,
+    bullets: [
+      "Contributed to software development projects within Microsoft's Africa Development Center",
+      "Built React-based frontend features and backend services using Python, Node.js, and TypeScript in Azure-hosted environments",
+      "Collaborated with cross-functional engineering teams on cloud-native application development",
+    ],
+    tags: ["Python", "TypeScript", "React", "Node.js", "Azure"],
   },
 ];
 
@@ -136,15 +163,15 @@ export const PROJECTS: Project[] = [
     icon: "🔮",
     title: "IRIS AI – Social Media Intelligence",
     metric: "Billions of signals · 187 languages · Real-time AI",
-    desc: "Backend engineering for Khoros's AI-native omnichannel social media platform. Kafka pipelines ingest social signals at scale; FastAPI services power LLM-driven sentiment analysis, response generation, and intelligent agent routing across Instagram, LinkedIn, TikTok, YouTube, and Facebook.",
-    tags: ["Python", "FastAPI", "Kafka", "DynamoDB", "Redis", "LLM"],
+    desc: "AI-native social media platform for enterprise brands — real-time pipelines processing billions of signals across 187 languages for sentiment analysis and intelligent routing.",
+    tags: ["Python", "TypeScript", "React", "LLM", "AI Agents"],
     badges: ["AI", "social-tech"],
   },
   {
     icon: "🌾",
     title: "DigiFarm Credit Platform",
     metric: "KES 1B+ loans · 2M+ farmers",
-    desc: "Credit scoring engine using produce delivery & transaction history, with loan disbursement infrastructure connecting farmers to Access Bank financial services.",
+    desc: "Credit scoring engine using produce delivery and transaction history, disbursing agricultural loans to 2M+ farmers via Access Bank.",
     tags: ["Java", "Spring Boot", "AWS", "PostgreSQL"],
     badges: ["fintech", "agri-tech"],
   },
@@ -152,7 +179,7 @@ export const PROJECTS: Project[] = [
     icon: "🤖",
     title: "AI Defect Detection Pipeline",
     metric: "RAG + vector search · CI/CD integrated",
-    desc: "End-to-end pipeline using Retrieval Augmented Generation to autonomously detect and resolve defects in live telecom billing infrastructure.",
+    desc: "RAG-powered pipeline that autonomously detects and resolves defects in live telecom billing infrastructure.",
     tags: ["RAG", "Vector DB", "Java", "GitLab CI"],
     badges: ["AI", "telecom"],
   },
@@ -160,7 +187,7 @@ export const PROJECTS: Project[] = [
     icon: "🏦",
     title: "KCB–BPR Merger Integration",
     metric: "1M+ customers · Zero downtime",
-    desc: "Cross-institutional API integration layer enabling seamless banking continuity during the KCB and BPR Rwanda merger across two countries.",
+    desc: "Cross-border API integration enabling zero-downtime banking continuity during the KCB–BPR Rwanda merger.",
     tags: ["Go", "WSO2", "Azure", "Kafka"],
     badges: ["banking", "integration"],
   },
@@ -168,7 +195,7 @@ export const PROJECTS: Project[] = [
     icon: "📡",
     title: "NBC Core Banking API Layer",
     metric: "30% faster incident response",
-    desc: "Enterprise middleware exposing Oracle Flexcube as secure REST APIs via WSO2, enabling digital and agency banking channels across Tanzania.",
+    desc: "Middleware exposing Oracle Flexcube as REST APIs, enabling digital and agency banking channels across Tanzania.",
     tags: ["Java", "WSO2", "OpenShift", "ELK"],
     badges: ["banking", "APIs"],
   },
@@ -176,20 +203,11 @@ export const PROJECTS: Project[] = [
     icon: "🚀",
     title: "Autonomous Dev Agents",
     metric: "Self-healing pipelines · Accelerated delivery",
-    desc: "AI agents that autonomously identify bugs and generate fixes within CI/CD pipelines, reducing manual intervention in telecom billing systems.",
+    desc: "Self-healing AI agents that identify bugs and generate fixes within CI/CD pipelines for telecom billing systems.",
     tags: ["AI Agents", "LLM", "Java", "Jenkins"],
     badges: ["AI", "automation"],
   },
-  {
-    icon: "💳",
-    title: "Fintech Integration Platform",
-    metric: "Multi-solution · Containerized",
-    desc: "Microservices platform connecting financial institutions, fintech partners and payment providers with secure cross-platform data exchange.",
-    tags: ["Go", "Java", "Kubernetes", "WSO2"],
-    badges: ["fintech", "microservices"],
-  },
 ];
-
 export const CONTACT_LINKS: ContactLink[] = [
   { icon: "✉️", label: "muchirinephat5@gmail.com", href: "mailto:muchirinephat5@gmail.com" },
   { icon: "📞", label: "+254 741 574 821", href: "tel:+254741574821" },
@@ -212,6 +230,10 @@ export const TAG_MAP: Record<string, TagStyle> = {
   pandas: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   "Spring Boot": { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   WSO2: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  TypeScript: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  "Node.js": { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  React: { color: "#0891B2", bg: "#ECFEFF", border: "#A5F3FC" },
+  Angular: { color: "#0891B2", bg: "#ECFEFF", border: "#A5F3FC" },
   // Cloud & DevOps
   AWS: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   Azure: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
@@ -228,6 +250,10 @@ export const TAG_MAP: Record<string, TagStyle> = {
   ELK: { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
   "ELK Stack": { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
   Grafana: { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
+  Prometheus: { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
+  // Integration
+  "Apache Camel": { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
+  ActiveMQ: { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
 };
 
 export const DEFAULT_TAG: TagStyle = { color: "#374151", bg: "#F3F4F6", border: "#E5E7EB" };

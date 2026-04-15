@@ -1,5 +1,6 @@
 import { COLORS, STATS } from "../data/content";
 import { useMobile } from "../context/MobileContext";
+import { CountUp } from "./CountUp";
 
 export function Hero() {
   const mobile = useMobile();
@@ -12,9 +13,42 @@ export function Hero() {
         alignItems: "flex-start",
         padding: mobile ? "5rem 1.25rem 4rem" : "5.5rem 2rem 5rem",
         background: COLORS.bg,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
+      {!mobile && (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: -100,
+              right: -120,
+              width: 500,
+              height: 500,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(96,165,250,.2) 0%, transparent 65%)",
+              animation: "float 8s ease-in-out infinite",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: -80,
+              left: -100,
+              width: 420,
+              height: 420,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(167,139,250,.15) 0%, transparent 65%)",
+              animation: "float 10s ease-in-out infinite 2s",
+              pointerEvents: "none",
+            }}
+          />
+        </>
+      )}
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%", position: "relative", zIndex: 1 }}>
         <div
           style={{
             display: "grid",
@@ -23,17 +57,15 @@ export function Hero() {
             alignItems: "center",
           }}
         >
-          {/* Left content */}
-          <div>
-            {/* Badge */}
+          <div style={{ animation: "hero-fade-in .8s ease both" }}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: ".5rem",
-                background: COLORS.greenBg,
-                border: `1px solid ${COLORS.greenBorder}`,
-                color: COLORS.green,
+                background: `${COLORS.accent}15`,
+                border: `1px solid ${COLORS.accent}40`,
+                color: COLORS.accent,
                 borderRadius: 99,
                 padding: ".3rem .9rem",
                 fontSize: ".78rem",
@@ -46,14 +78,13 @@ export function Hero() {
                   width: 7,
                   height: 7,
                   borderRadius: "50%",
-                  background: COLORS.green,
+                  background: COLORS.accent,
                   display: "inline-block",
                 }}
               />
-              Open to Remote Opportunities
+              AI Innovation Specialist
             </div>
 
-            {/* Name */}
             <h1
               style={{
                 fontSize: mobile ? "2.2rem" : "3rem",
@@ -64,10 +95,9 @@ export function Hero() {
                 color: COLORS.text,
               }}
             >
-              Nephat Muchiri
+              Nephat Mutugi Muchiri
             </h1>
 
-            {/* Role gradient */}
             <div
               style={{
                 fontSize: mobile ? "1.2rem" : "1.55rem",
@@ -78,7 +108,7 @@ export function Hero() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              AI Innovation Engineer
+              Software Engineer
             </div>
 
             <p
@@ -90,18 +120,18 @@ export function Hero() {
                 lineHeight: 1.7,
               }}
             >
-              Senior engineer with 7+ years shipping scalable backend systems,
-              financial platforms, and cloud-native AI solutions across fintech,
+              Software engineer with 7+ years building full-stack applications,
+              AI-powered products, and cloud-native solutions across fintech,
               telecom, and agri-tech ecosystems in Africa and beyond.
             </p>
 
-            {/* CTA buttons */}
             <div style={{ display: "flex", gap: ".75rem", flexWrap: "wrap" }}>
               <a
                 href="#projects"
+                className="btn-hover"
                 style={{
                   background: COLORS.accent,
-                  color: "#fff",
+                  color: "#0F172A",
                   padding: ".65rem 1.5rem",
                   borderRadius: 9,
                   fontWeight: 700,
@@ -113,9 +143,10 @@ export function Hero() {
               </a>
               <a
                 href="#contact"
+                className="btn-outline-hover"
                 style={{
-                  border: `1.5px solid ${COLORS.border}`,
-                  color: COLORS.text,
+                  border: `1.5px solid ${COLORS.accent}`,
+                  color: COLORS.accent,
                   padding: ".65rem 1.5rem",
                   borderRadius: 9,
                   fontWeight: 600,
@@ -123,60 +154,81 @@ export function Hero() {
                   fontSize: ".9rem",
                 }}
               >
-                Get In Touch
+                Contact Me
               </a>
             </div>
 
-            {/* Stats */}
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: mobile ? "repeat(2,1fr)" : "repeat(4,1fr)",
                 gap: "1rem",
                 marginTop: "2.25rem",
-                paddingTop: "1.75rem",
-                borderTop: `1px solid ${COLORS.border}`,
               }}
             >
-              {STATS.map((s) => (
-                <div key={s.label} style={{ textAlign: mobile ? "center" : "left" }}>
-                  <div style={{ fontSize: mobile ? "1.4rem" : "1.8rem", fontWeight: 800, color: COLORS.text }}>
-                    {s.num}
+              {STATS.map((s, i) => {
+                const accents = [COLORS.accent, COLORS.accent2, COLORS.green, "#FB923C"];
+                return (
+                  <div
+                    key={s.label}
+                    style={{
+                      textAlign: mobile ? "center" : "left",
+                      background: COLORS.surface,
+                      borderRadius: 10,
+                      padding: ".9rem 1rem",
+                      borderTop: `3px solid ${accents[i % accents.length]}`,
+                      boxShadow: "0 2px 12px rgba(0,0,0,.2)",
+                    }}
+                  >
+                    <CountUp
+                      value={s.num}
+                      style={{ fontSize: mobile ? "1.4rem" : "1.8rem", fontWeight: 800, color: COLORS.text }}
+                    />
+                    <div style={{ fontSize: ".72rem", color: COLORS.muted, marginTop: ".1rem", lineHeight: 1.3 }}>
+                      {s.label}
+                    </div>
                   </div>
-                  <div style={{ fontSize: ".72rem", color: COLORS.muted, marginTop: ".1rem", lineHeight: 1.3 }}>
-                    {s.label}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
-          {/* Avatar — desktop only */}
           {!mobile && (
             <div
               style={{
-                width: 260,
-                height: 300,
-                borderRadius: 20,
+                width: 268,
+                height: 308,
+                borderRadius: 22,
                 flexShrink: 0,
-                background: "linear-gradient(135deg,#EFF6FF,#EDE9FE)",
-                border: `2px solid ${COLORS.border}`,
-                overflow: "hidden",
+                padding: 4,
+                background: "conic-gradient(from var(--border-angle, 0deg), #60A5FA, #A78BFA, #4ADE80, #60A5FA)",
+                animation: "hero-fade-in .8s ease .3s both, rotate-border 8s linear infinite",
+                boxShadow: "0 0 40px rgba(96,165,250,.2), 0 0 80px rgba(167,139,250,.1)",
               }}
             >
-              <img
-                src="/avatar.jpg"
-                alt="Nephat Muchiri – AI Innovation Engineer"
-                width={260}
-                height={300}
+              <div
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  display: "block",
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  background: COLORS.bg,
                 }}
-              />
+              >
+                <img
+                  src="/avatar.jpg"
+                  alt="Nephat Mutugi Muchiri – Software Engineer"
+                  width={260}
+                  height={300}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    display: "block",
+                  }}
+                />
+              </div>
             </div>
           )}
         </div>
