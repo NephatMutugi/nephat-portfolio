@@ -36,7 +36,7 @@ export const SKILLS: Skill[] = [
     color: "#2563EB",
     bg: "#EFF6FF",
     border: "#BFDBFE",
-    tags: ["Java", "Go", "Python", "Kotlin", "TypeScript", "Spring Boot", "Microservices", "Apache Camel"],
+    tags: ["Python", "FastAPI", "Java", "Go", "Kotlin", "TypeScript", "Spring Boot", "NumPy", "pandas", "Microservices", "Apache Camel"],
   },
   {
     icon: "☁️",
@@ -60,7 +60,7 @@ export const SKILLS: Skill[] = [
     color: "#B45309",
     bg: "#FFFBEB",
     border: "#FDE68A",
-    tags: ["PostgreSQL", "Oracle", "MySQL", "MongoDB"],
+    tags: ["PostgreSQL", "DynamoDB", "Redis", "Oracle", "MySQL", "MongoDB"],
   },
   {
     icon: "📊",
@@ -74,18 +74,19 @@ export const SKILLS: Skill[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    role: "AI Innovation Specialist – Software Engineering",
-    company: "Crossover",
+    role: "AI Innovations Specialist – Software Engineering",
+    company: "Crossover / IgniteTech (Khoros)",
     location: "Remote",
     period: "2024 – Present",
     award: null,
     bullets: [
-     "Building telecom billing platforms for One Albania and Airtel",
-      "Implementing RAG-based defect detection pipelines with vector search",
-      "Developing autonomous AI agents to accelerate software delivery",
-      "Integrating AI tooling into CI/CD for automated defect identification & resolution",
+      "Engineering Python/FastAPI backend services for IRIS AI — Khoros's AI-native omnichannel social media management platform serving enterprise brands",
+      "Building real-time Kafka streaming pipelines to ingest and process billions of social signals across 187 languages for sentiment analysis and intelligent routing",
+      "Designing DynamoDB data models and Redis caching layers powering high-throughput social engagement and brand care workflows",
+      "Integrating LLMs for AI-driven sentiment analysis, response generation, content scheduling, and automated interaction triage across channels including Instagram, LinkedIn, TikTok, YouTube, and Facebook",
+      "Developing data processing pipelines with NumPy and pandas to surface actionable analytics and community health insights for enterprise clients",
     ],
-    tags: ["AI Agents", "RAG", "Java", "Spring Boot", "Kubernetes", "GitLab CI"],
+    tags: ["Python", "FastAPI", "Kafka", "DynamoDB", "Redis", "LLM", "AI Agents", "AWS"],
   },
   {
     role: "Senior Software Engineer (IC)",
@@ -131,6 +132,14 @@ export const EXPERIENCE: ExperienceItem[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    icon: "🔮",
+    title: "IRIS AI – Social Media Intelligence",
+    metric: "Billions of signals · 187 languages · Real-time AI",
+    desc: "Backend engineering for Khoros's AI-native omnichannel social media platform. Kafka pipelines ingest social signals at scale; FastAPI services power LLM-driven sentiment analysis, response generation, and intelligent agent routing across Instagram, LinkedIn, TikTok, YouTube, and Facebook.",
+    tags: ["Python", "FastAPI", "Kafka", "DynamoDB", "Redis", "LLM"],
+    badges: ["AI", "social-tech"],
+  },
   {
     icon: "🌾",
     title: "DigiFarm Credit Platform",
@@ -189,23 +198,33 @@ export const CONTACT_LINKS: ContactLink[] = [
 ];
 
 export const TAG_MAP: Record<string, TagStyle> = {
+  // AI / ML
   RAG: { color: "#7C3AED", bg: "#F5F3FF", border: "#DDD6FE" },
   "AI Agents": { color: "#7C3AED", bg: "#F5F3FF", border: "#DDD6FE" },
   "Vector DB": { color: "#7C3AED", bg: "#F5F3FF", border: "#DDD6FE" },
   LLM: { color: "#7C3AED", bg: "#F5F3FF", border: "#DDD6FE" },
+  // Languages & frameworks
   Java: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   Go: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   Python: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  FastAPI: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  NumPy: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  pandas: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   "Spring Boot": { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
   WSO2: { color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  // Cloud & DevOps
   AWS: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   Azure: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   Kubernetes: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   OpenShift: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   "GitLab CI": { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
   Jenkins: { color: "#C2410C", bg: "#FFF7ED", border: "#FED7AA" },
+  // Data & Streaming
   Kafka: { color: "#B45309", bg: "#FFFBEB", border: "#FDE68A" },
+  Redis: { color: "#B45309", bg: "#FFFBEB", border: "#FDE68A" },
+  DynamoDB: { color: "#B45309", bg: "#FFFBEB", border: "#FDE68A" },
   PostgreSQL: { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
+  // Observability
   ELK: { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
   "ELK Stack": { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
   Grafana: { color: "#0E7490", bg: "#ECFEFF", border: "#A5F3FC" },
