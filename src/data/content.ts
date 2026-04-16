@@ -94,13 +94,13 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "2024 – Mar 2026",
     award: null,
     bullets: [
-      "Engineering full-stack services for an AI-native omnichannel social media management platform serving enterprise brands",
-      "Building real-time Kafka streaming pipelines to ingest and process billions of social signals across 187 languages for sentiment analysis and intelligent routing",
-      "Designing DynamoDB data models and Redis caching layers powering high-throughput social engagement and brand care workflows",
-      "Integrating LLMs for AI-driven sentiment analysis, response generation, content scheduling, and automated interaction triage across channels including Instagram, LinkedIn, TikTok, YouTube, and Facebook",
-      "Developing data processing pipelines with NumPy and pandas to surface actionable analytics and community health insights for enterprise clients",
+      "Built and managed large-scale BSS/OSS platforms for Tier-1 telecom operators, serving millions of subscribers across multiple markets",
+      "Led a team owning the full lifecycle of a cloud-native BSS/OSS suite spanning billing & revenue management, work order management, policy & charging control, service order provisioning, mediation, CRM, and campaign management",
+      "Engineered high-throughput billing and mediation pipelines processing hundreds of millions of charging events daily with sub-second latency using Java, Kafka, and OpenShift",
+      "Designed and delivered microservices for service order provisioning and policy & charging control (PCRF/PCF), integrating with 3GPP-compliant network elements across Tier-1 operator environments",
+      "Applied AI-first development practices — using LLM-powered tooling and autonomous agents to accelerate delivery, detect billing defects, and auto-generate regression test suites across the BSS/OSS stack",
     ],
-    tags: ["Python", "FastAPI", "Kafka", "DynamoDB", "Redis", "LLM", "AI Agents", "AWS"],
+    tags: ["Java", "Spring Boot", "Kafka", "Kubernetes", "OpenShift", "PostgreSQL", "LLM", "Microservices"],
   },
   {
     role: "Senior Software Engineer (IC)",
@@ -254,6 +254,7 @@ export const TAG_MAP: Record<string, TagStyle> = {
   // Integration
   "Apache Camel": { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
   ActiveMQ: { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
+  Microservices: { color: "#15803D", bg: "#F0FDF4", border: "#BBF7D0" },
 };
 
 export const DEFAULT_TAG: TagStyle = { color: "#374151", bg: "#F3F4F6", border: "#E5E7EB" };
