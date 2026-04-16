@@ -80,12 +80,13 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Apr 2026 – Present",
     award: null,
     bullets: [
-      "Architecting and deploying AI-driven systems that cut development timelines, reduce errors, and deliver solutions with scalability across IgniteTech's product portfolio",
-      "Fine-tuning LLMs to build new AI-powered products and modules integrated into existing solutions or forming the foundation of new offerings",
-      "Building full-stack features with React frontends and Python/Node.js backends, automating internal workflows using advanced AI techniques",
-      "Leveraging multiple LLMs (GPT, Claude, Mistral) and GenAI code assistants to accelerate full-stack development and continuous delivery",
+      "Engineering Python/FastAPI backend services for an AI-native omnichannel social media management platform serving enterprise brands",
+      "Building real-time Kafka streaming pipelines to ingest and process billions of social signals across 187 languages for sentiment analysis and intelligent routing",
+      "Designing DynamoDB data models and Redis caching layers powering high-throughput social engagement and brand care workflows",
+      "Integrating LLMs for AI-driven sentiment analysis, response generation, content scheduling, and automated interaction triage across channels including Instagram, LinkedIn, TikTok, YouTube, and Facebook",
+      "Developing data processing pipelines with NumPy and pandas to surface actionable analytics and community health insights for enterprise clients",
     ],
-    tags: ["Python", "TypeScript", "React", "Node.js", "LLM", "AI Agents", "FastAPI"],
+    tags: ["Python", "FastAPI", "Kafka", "DynamoDB", "Redis", "LLM", "AI Agents", "AWS"],
   },
   {
     role: "AI-First Java Developer",
