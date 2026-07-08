@@ -1,7 +1,7 @@
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { Skills } from "./components/Skills";
-import { Experience } from "./components/Experience";
+import { DomainExpertise } from "./components/DomainExpertise";
 import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
@@ -37,7 +37,7 @@ export default function App() {
         <Divider />
         <Skills />
         <Divider />
-        <Experience />
+        <DomainExpertise />
         <Divider />
         <Projects />
         <Divider />

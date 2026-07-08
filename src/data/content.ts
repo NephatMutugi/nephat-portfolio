@@ -210,7 +210,7 @@ export const PROJECTS: Project[] = [
   },
 ];
 export const CONTACT_LINKS: ContactLink[] = [
-  { icon: "✉️", label: "muchirinephat5@gmail.com", href: "mailto:muchirinephat5@gmail.com" },
+  { icon: "✉️", label: "mutuginephat@gmail.com", href: "mailto:mutuginephat@gmail.com" },
   { icon: "📞", label: "+254 741 574 821", href: "tel:+254741574821" },
   { icon: "💼", label: "linkedin.com/in/nephat-mutugi", href: "https://linkedin.com/in/nephat-mutugi/" },
   { icon: "📍", label: "Nairobi, Kenya · Remote-first", href: null },
